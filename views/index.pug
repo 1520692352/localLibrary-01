@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #[em 本地图书馆],一个非常基本的 Express 网站，作为 Mozilla 开发人员网络上的教程示例开发。
+
+  h1 Dynamic content
+
+  if error
+    p 获取动态内容时出错。
+  else
+    p 图书馆有以下记录计数:
+
+    ul
+      li #[strong 书籍:] !{data.book_count}
+      li #[strong 副本:] !{data.book_instance_count}
+      li #[strong 副本可用:] !{data.book_instance_available_count}
+      li #[strong 作者:] !{data.author_count}
+      li #[strong 种类:] !{data.genre_count}

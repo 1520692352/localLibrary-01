@@ -1,0 +1,13 @@
+extends layout
+
+block content
+    h1=title
+
+    ul
+    each genre in genre_list
+        li
+            //种类详细信息的url和种类名称
+            a(href=genre.url) #{genre.name}
+
+    else
+        li 种类不存在

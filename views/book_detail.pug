@@ -1,0 +1,40 @@
+extends layout
+
+block content
+    h1 #{title}: #{book.title}
+
+    p #[strong 作者:]
+        a(href=book.author.url) #{book.author.name}
+    p #[strong 简介:] #{book.summary}
+    p #[strong ISBN:] #{book.isbn}
+    p #[strong 种类:]&nbsp;
+        each val, index in book.genre
+            a(href=val.url) #{val.name}
+            if index < book.genre.length - 1
+                |,
+
+    div(style='margin-left:20px;margin-top:20px')
+        h4 副本
+
+        each val in book_instances
+            hr
+            if val.status=='Available'
+                p.text-success #{val.status}
+            else if val.status=='Maintenance'
+                p.text-danger #{val.status}
+            else
+                p.text-warning #{val.status}
+            p #[strong 出版社:] #{val.imprint}
+            if val.status!='Available'
+                p #[strong 归还日期:] #{val.due_back}
+            p #[strong Id:]&nbsp;
+                a(href=val.url) #{val._id}
+
+        else
+            p 图书馆里没有这本书
+
+    hr
+    p
+        a(href=book.url + '/delete') 删除书
+    p
+        a(href=book.url + '/update') 更新书
